@@ -1,17 +1,15 @@
-export NO_PROXY="127.0.0.1,localhost"
+FILE_PATH=PATH/TO/COURPUS/AND/INDEX/FILES
+INDEX_FILE=$FILE_PATH/wiki-18-e5-index/e5_Flat.index
+CORPUS_FILE=$FILE_PATH/wiki-18-corpus/wiki-18.jsonl
+RETRIEVER_NAME=e5
+RETRIEVER_PATH=PATH/TO/RETRIEVER/e5-base-v2
+PORT=8000
 
-file_path=/mnt/cfs_algo_bj/models/experiments/xucan05/data
-index_file=$file_path/wiki-18-e5-index/e5_Flat.index
-corpus_file=$file_path/wiki-18-corpus/wiki-18.jsonl
-retriever_name=e5
-retriever_path=/mnt/cfs_algo_bj/models/opensource_model/e5-base-v2
-
-python reason_search/search/retrieval_server.py --index_path $index_file \
-                                            --corpus_path $corpus_file \
+python reason_search/search/retrieval_server.py --index_path $INDEX_FILE \
+                                            --corpus_path $CORPUS_FILE \
                                             --topk 3 \
-                                            --retriever_name $retriever_name \
-                                            --retriever_model $retriever_path \
-                                            --faiss_gpu
+                                            --retriever_name $RETRIEVER_NAME \
+                                            --retriever_model $RETRIEVER_PATH \
+                                            --faiss_gpu \
+                                            --port $PORT
                                             
-export https_proxy=http://agent.baidu.com:8891
-export http_proxy=http://agent.baidu.com:8891
